@@ -332,8 +332,17 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio18.js duas queries, nesta ordem:
 
 // Crie uma query que faça a criação de um índice do tipo text no campo descricao com o idioma padrão portuguese.
+use('commerce');
+db.produtos.createIndex(
+  { descricao: 'text' }, 
+  { default_language: 'portuguese'  }
+);
 
 // Crie uma query que retorne a quantidade de documentos que contêm a expressão feito com utilizando o operador $text.
+use('commerce');
+db.produtos.find(
+  { $text: { $search: '/feito com/' } },
+).count();
 
 // 19 - Renomeie o campo descricao para descricaoSite em todos os documentos.
 // Para isso, escreva no arquivo desafio19.js duas queries, nesta ordem:
