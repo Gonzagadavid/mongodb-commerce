@@ -156,8 +156,18 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio9.js duas queries, nesta ordem:
 
 // Crie uma query que faça a remoção do último ingrediente no sanduíche Cheddar McMelt.
+use('commerce');
+db.produtos.updateMany(
+  { nome: 'Cheddar McMelt' }, 
+  { $pop: { ingredientes: 1 } },
+);
 
 // Crie uma query que retorne o nome e ingredientes de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, ingredientes: true },
+);
 
 // 10 - Adicione a quantidade de vendas dos sanduíches por dia da semana.
 // Para isso, escreva no arquivo desafio10.js quatro queries, nesta ordem:
