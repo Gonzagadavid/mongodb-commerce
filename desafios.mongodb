@@ -307,6 +307,11 @@ db.produtos.find(
 ).count();
 
 // 16 - Conte quantos produtos têm 4 ingredientes.
+use('commerce');
+db.produtos.find(
+  { ingredientes: { $size: 4 } },
+).count();
+
 // 17 - Conte quantos documentos contêm as palavras frango ou hamburguer utilizando o operador $text.
 // Para isso, escreva no arquivo desafio17.js duas queries, nesta ordem:
 
