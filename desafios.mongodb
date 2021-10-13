@@ -301,6 +301,11 @@ db.produtos.find(
 );
 
 // 15 - Conte quantos produtos contêm Mc no nome, sem considerar letras maiúsculas ou minúsculas.
+use('commerce');
+db.produtos.find(
+  { nome: { $regex: /Mc/i } },
+).count();
+
 // 16 - Conte quantos produtos têm 4 ingredientes.
 // 17 - Conte quantos documentos contêm as palavras frango ou hamburguer utilizando o operador $text.
 // Para isso, escreva no arquivo desafio17.js duas queries, nesta ordem:
