@@ -139,8 +139,18 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio8.js duas queries, nesta ordem:
 
 // Crie uma query que faça a remoção do primeiro ingrediente no sanduíche Quarteirão com Queijo.
+use('commerce');
+db.produtos.updateMany(
+  { nome: 'Quarteirão com Queijo' }, 
+  { $pop: { ingredientes: -1 } },
+);
 
 // Crie uma query que retorne o nome e ingredientes de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, ingredientes: true },
+);
 
 // 9 - Remova o último ingrediente do sanduíche Cheddar McMelt.
 // Para isso, escreva no arquivo desafio9.js duas queries, nesta ordem:
