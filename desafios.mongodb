@@ -370,8 +370,18 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio20.js duas queries, nesta ordem:
 
 // Crie uma query que faça a remoção do campo curtidas do item Big Mac.
+use('commerce');
+db.produtos.updateOne(
+  { nome: 'Big Mac' }, 
+  { $unset: { curtidas: ''} },
+);
 
 // Crie uma query que retorne o nome e curtidas de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, curtidas: true },
+);
 
 // 21 - Retorne o nome dos sanduíches em que o número de curtidas é maior que o número de sanduíches vendidos.
 // 22 - Retorne o nome e a quantidade de vendas (vendidos) dos sanduíches em que o número de vendas é múltiplo de 5.
