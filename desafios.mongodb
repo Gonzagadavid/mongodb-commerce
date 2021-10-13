@@ -122,8 +122,18 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio7.js duas queries, nesta ordem:
 
 // Crie uma query que faça a remoção do item cebola em todos os sanduíches.
+use('commerce');
+db.produtos.updateMany(
+  {}, 
+  { $pull: { ingredientes: 'cebola' } },
+);
 
 // Crie uma query que retorne o nome e ingredientes de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, ingredientes: true },
+);
 
 // 8 - Remova o primeiro ingrediente do sanduíche Quarteirão com Queijo.
 // Para isso, escreva no arquivo desafio8.js duas queries, nesta ordem:
