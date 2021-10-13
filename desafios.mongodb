@@ -5,6 +5,7 @@ use('commerce');
 db.dropDatabase();
 // 1 - Inclua o campo criadoPor em todos os documentos, colocando "Ronald McDonald" no valor desse campo.
 // Para isso, escreva no arquivo desafio1.js duas queries, nesta ordem:
+
 // Crie uma query que adicione o campo criadoPor em todos os documentos, colocando "Ronald McDonald" no valor desse campo.
 use('commerce');
 db.produtos.updateMany(
@@ -20,6 +21,7 @@ db.produtos.find(
 
 // 2 - Inclua o campo valorUnitario em todos os documentos em que esse campo não existe e atribua a ele o valor "0.00", com o tipo NumberDecimal.
 // Para isso, escreva no arquivo desafio2.js duas queries, nesta ordem:
+
 // Crie uma query que adicione o campo valorUnitario em todos os documentos em que esse campo não existe e atribua a ele o valor "0.00", com o tipo NumberDecimal.
 use('commerce');
 db.produtos.updateMany(
@@ -36,6 +38,7 @@ db.produtos.find(
 
 // 3 - Adicione o campo avaliacao em todos os documentos da coleção e efetue alterações nesse campo.
 // Para isso, escreva no arquivo desafio3.js quatro queries, nesta ordem:
+
 // Crie uma query que inclua o campo avaliacao do tipo NumberInt e com o valor 0 em todos os documentos da coleção.
 use('commerce');
 db.produtos.updateMany(
@@ -66,6 +69,7 @@ db.produtos.find(
 
 // 4 - Atribua a data corrente ao campo ultimaModificacao no sanduíche Big Mac.
 // Para isso, escreva no arquivo desafio4.js duas queries, nesta ordem:
+
 // Crie uma query que atribua a data corrente ao campo ultimaModificacao no sanduíche Big Mac. Para a data corrente faça uso do tipo Date.
 use('commerce');
 db.produtos.updateMany(
@@ -82,6 +86,7 @@ db.produtos.find(
 
 // 5 - Adicione ketchup aos ingredientes para todos os sanduíches menos o McChicken, garantindo que não haja duplicidade nos ingredientes.
 // Para isso, escreva no arquivo desafio5.js duas queries, nesta ordem:
+
 // Crie uma query que adicione ketchup aos ingredientes para todos os sanduíches menos o McChicken, garantindo que não haja duplicidade nos ingredientes.
 use('commerce');
 db.produtos.updateMany(
@@ -100,8 +105,18 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio6.js duas queries, nesta ordem:
 
 // Crie uma query que faça a inclusão de bacon no final da lista de ingredientes dos sanduíches Big Mac e Quarteirão com Queijo.
+use('commerce');
+db.produtos.updateMany(
+  { nome: { $in: ['Big Mac', 'Quarteirão com Queijo'] } }, 
+  { $push: { ingredientes: 'bacon' } },
+);
 
 // Crie uma query que retorne o nome e ingredientes de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, ingredientes: true },
+);
 
 // 7 - Remova o item cebola de todos os sanduíches.
 // Para isso, escreva no arquivo desafio7.js duas queries, nesta ordem:
