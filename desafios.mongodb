@@ -211,8 +211,24 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio11.js duas queries, nesta ordem:
 
 // Crie uma query que faça tanto a inserção dos elementos combo e tasty no array tags de todos os sanduíches quanto a ordenação dos elementos de tags em ordem alfabética ascendente.
+use('commerce');
+db.produtos.updateMany(
+  {}, 
+  { $push: { 
+      tags: {
+        $each: ['combo', 'tasty'],
+        $sort: 1,
+      }
+    } 
+  },
+);
 
 // Crie uma query que retorne o nome e tags de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, tags: true },
+);
 
 // 12 - Ordene em todos os documentos os elementos do array valoresNutricionais pelo campo percentual de forma descendente.
 // Para isso, escreva no arquivo desafio12.js duas queries, nesta ordem:
