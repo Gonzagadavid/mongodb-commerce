@@ -72,7 +72,7 @@ db.produtos.find(
 
 // Crie uma query que atribua a data corrente ao campo ultimaModificacao no sanduíche Big Mac. Para a data corrente faça uso do tipo Date.
 use('commerce');
-db.produtos.updateMany(
+db.produtos.updateOne(
   { nome: 'Big Mac' }, 
   { $set: { ultimaModificacao: Date() } },
 );
@@ -140,7 +140,7 @@ db.produtos.find(
 
 // Crie uma query que faça a remoção do primeiro ingrediente no sanduíche Quarteirão com Queijo.
 use('commerce');
-db.produtos.updateMany(
+db.produtos.updateOne(
   { nome: 'Quarteirão com Queijo' }, 
   { $pop: { ingredientes: -1 } },
 );
@@ -157,7 +157,7 @@ db.produtos.find(
 
 // Crie uma query que faça a remoção do último ingrediente no sanduíche Cheddar McMelt.
 use('commerce');
-db.produtos.updateMany(
+db.produtos.updateOne(
   { nome: 'Cheddar McMelt' }, 
   { $pop: { ingredientes: 1 } },
 );
@@ -175,11 +175,37 @@ db.produtos.find(
 // Crie uma query que inclua um array com sete posições em todos os sanduíches. Cada uma delas representará um dia da semana, e cada posição iniciará em 0. O array deve se parecer como abaixo:
 // "vendasPorDia": [0, 0, 0, 0, 0, 0, 0]
 // O primeiro item desse array representa as vendas no domingo, o segundo item representa as vendas na segunda-feira, e assim até chegar ao último item, que representa as vendas no sábado.
+use('commerce');
+db.produtos.updateMany(
+  {}, 
+  { $push: { 
+      vendasPorDia: {
+        $each: [0, 0, 0, 0, 0, 0, 0]
+      }
+    } 
+  },
+);
+
 // Crie uma query que incremente as vendas de Big Mac às quartas-feiras em 60.
+use('commerce');
+db.produtos.updateOne(
+  { nome: 'Big Mac' }, 
+  { $inc: { 'vendasPorDia.3': 60} },
+);
 
 // Crie uma query que incremente as vendas de todos os sanduíches de carne do tipo bovino e pão aos sábados em 120.
+use('commerce');
+db.produtos.updateMany(
+  { tags: { $all: ['bovino', 'pão'] } }, 
+  { $inc: { 'vendasPorDia.6': 120} },
+);
 
 // Crie uma query que retorne o nome e vendasPorDia de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, vendasPorDia: true },
+);
 
 // 11 - Insira os elementos combo e tasty no array tags de todos os sanduíches e aproveite para deixar os elementos em ordem alfabética ascendente.
 // Para isso, escreva no arquivo desafio11.js duas queries, nesta ordem:

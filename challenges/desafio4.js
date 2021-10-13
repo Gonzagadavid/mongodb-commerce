@@ -1,4 +1,4 @@
-db.produtos.updateMany(
+db.produtos.updateOne(
   { nome: "Big Mac" }, 
   { $set: { ultimaModificacao: Date() } },
 );
