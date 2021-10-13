@@ -16,7 +16,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, criadoPor: true },
+  { _id: false, nome: true, criadoPor: true },
 );
 
 // 2 - Inclua o campo valorUnitario em todos os documentos em que esse campo não existe e atribua a ele o valor "0.00", com o tipo NumberDecimal.
@@ -33,7 +33,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, valorUnitario: true },
+  { _id: false, nome: true, valorUnitario: true },
 );
 
 // 3 - Adicione o campo avaliacao em todos os documentos da coleção e efetue alterações nesse campo.
@@ -64,7 +64,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, avaliacao: true },
+  { _id: false, nome: true, avaliacao: true },
 );
 
 // 4 - Atribua a data corrente ao campo ultimaModificacao no sanduíche Big Mac.
@@ -81,7 +81,7 @@ db.produtos.updateOne(
 use('commerce');
 db.produtos.find(
   { ultimaModificacao: { $exists: true } },
-  {_id: false, nome: true },
+  { _id: false, nome: true },
 );
 
 // 5 - Adicione ketchup aos ingredientes para todos os sanduíches menos o McChicken, garantindo que não haja duplicidade nos ingredientes.
@@ -98,7 +98,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, ingredientes: true },
+  { _id: false, nome: true, ingredientes: true },
 );
 
 // 6 - Inclua bacon no final da lista de ingredientes dos sanduíches Big Mac e Quarteirão com Queijo.
@@ -115,7 +115,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, ingredientes: true },
+  { _id: false, nome: true, ingredientes: true },
 );
 
 // 7 - Remova o item cebola de todos os sanduíches.
@@ -132,7 +132,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, ingredientes: true },
+  { _id: false, nome: true, ingredientes: true },
 );
 
 // 8 - Remova o primeiro ingrediente do sanduíche Quarteirão com Queijo.
@@ -149,7 +149,7 @@ db.produtos.updateOne(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, ingredientes: true },
+  { _id: false, nome: true, ingredientes: true },
 );
 
 // 9 - Remova o último ingrediente do sanduíche Cheddar McMelt.
@@ -166,7 +166,7 @@ db.produtos.updateOne(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, ingredientes: true },
+  { _id: false, nome: true, ingredientes: true },
 );
 
 // 10 - Adicione a quantidade de vendas dos sanduíches por dia da semana.
@@ -204,7 +204,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, vendasPorDia: true },
+  { _id: false, nome: true, vendasPorDia: true },
 );
 
 // 11 - Insira os elementos combo e tasty no array tags de todos os sanduíches e aproveite para deixar os elementos em ordem alfabética ascendente.
@@ -227,7 +227,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, tags: true },
+  { _id: false, nome: true, tags: true },
 );
 
 // 12 - Ordene em todos os documentos os elementos do array valoresNutricionais pelo campo percentual de forma descendente.
@@ -251,7 +251,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, valoresNutricionais: true },
+  { _id: false, nome: true, valoresNutricionais: true },
 );
 
 // 13 - Adicione o elemento muito sódio ao final do array tags nos produtos em que o percentual de sódio seja maior ou igual a 40.
@@ -274,7 +274,7 @@ db.produtos.updateMany(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, tags: true },
+  { _id: false, nome: true, tags: true },
 );
 
 // 14 - Adicione o elemento contém sódio ao final do array tags nos produtos em que o percentual de sódio seja maior do que 20 e menor do que 40.
@@ -380,14 +380,19 @@ db.produtos.updateOne(
 use('commerce');
 db.produtos.find(
   {},
-  {_id: false, nome: true, curtidas: true },
+  { _id: false, nome: true, curtidas: true },
 );
 
 // 21 - Retorne o nome dos sanduíches em que o número de curtidas é maior que o número de sanduíches vendidos.
 use('commerce');
 db.produtos.find(
   { $expr: { $gt: ['$curtidas', '$vendidos'] } },
-  {_id: false, nome: true },
+  { _id: false, nome: true },
 );
 
 // 22 - Retorne o nome e a quantidade de vendas (vendidos) dos sanduíches em que o número de vendas é múltiplo de 5.
+use('commerce');
+db.produtos.find(
+  { vendidos: { $mod: [5, 0] } },
+  { _id: false, nome: true, vendidos: true },
+);
