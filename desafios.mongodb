@@ -234,8 +234,25 @@ db.produtos.find(
 // Para isso, escreva no arquivo desafio12.js duas queries, nesta ordem:
 
 // Crie uma query que faça em todos os documentos a ordenação dos elementos do array valoresNutricionais pelo campo percentual de forma descendente. Dica: mesmo sem adicionar nenhum novo elemento, para essa operação é necessário utilizar também o modificador $each.
+use('commerce');
+db.produtos.updateMany(
+  {}, 
+  { $push: { 
+      valoresNutricionais: {
+        $each: [],
+        $sort: {percentual: -1 },
+      }
+    } 
+  },
+);
+
 
 // Crie uma query que retorne o nome e valoresNutricionais de todos os documentos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, valoresNutricionais: true },
+);
 
 // 13 - Adicione o elemento muito sódio ao final do array tags nos produtos em que o percentual de sódio seja maior ou igual a 40.
 // Para isso, escreva no arquivo desafio13.js duas queries, nesta ordem:
