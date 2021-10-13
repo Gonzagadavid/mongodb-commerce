@@ -1,6 +1,8 @@
 use('commerce');
-db.produtos.find();
+db.produtos.find().count();
 
+use('commerce');
+db.dropDatabase();
 // 1 - Inclua o campo criadoPor em todos os documentos, colocando "Ronald McDonald" no valor desse campo.
 // Para isso, escreva no arquivo desafio1.js duas queries, nesta ordem:
 // Crie uma query que adicione o campo criadoPor em todos os documentos, colocando "Ronald McDonald" no valor desse campo.
@@ -18,10 +20,19 @@ db.produtos.find(
 
 // 2 - Inclua o campo valorUnitario em todos os documentos em que esse campo não existe e atribua a ele o valor "0.00", com o tipo NumberDecimal.
 // Para isso, escreva no arquivo desafio2.js duas queries, nesta ordem:
-
 // Crie uma query que adicione o campo valorUnitario em todos os documentos em que esse campo não existe e atribua a ele o valor "0.00", com o tipo NumberDecimal.
+use('commerce');
+db.produtos.updateMany(
+  { valorUnitario: { $exists: false } },
+  { $set: { valorUnitario:  NumberDecimal('0.00') } }
+);
 
 // Crie uma query que retorne o nome e valorUnitario de todos os produtos.
+use('commerce');
+db.produtos.find(
+  {},
+  {_id: false, nome: true, valorUnitario: true },
+);
 
 // 3 - Adicione o campo avaliacao em todos os documentos da coleção e efetue alterações nesse campo.
 // Para isso, escreva no arquivo desafio3.js quatro queries, nesta ordem:
